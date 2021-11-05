@@ -8,12 +8,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table(name = "Produto")
+@Table(name = "tb_produto")
 public class Produto {
 	
 	@Id
@@ -21,10 +22,9 @@ public class Produto {
 	private long id;
 	
 	@NotNull
-	@Size(min=1, max=2, message="deve ter de 1 ou 2 caracteres")
 	private int classificacao;
 	
-	@NotNull
+	@NotBlank
 	@Size(min=3, max=60, message="Titulo no minimo 3 e maximo 200")
 	private String titulo;
 	
@@ -32,7 +32,8 @@ public class Produto {
 	@Size(min=3, max=500, message="Descrição no minimo 3 e maximo 200")
 	private String descricao;
 	
-	@NotBlank
+	@NotNull
+	@Positive(message = "o valor deve ser acima de 0")
 	private double preco;
 	
 	@ManyToOne
