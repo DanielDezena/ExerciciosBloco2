@@ -2,6 +2,7 @@ package org.generation.farmacia.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -30,7 +31,7 @@ public class Categoria {
 	
 	//ex: título: remédio, subtítulo: capilar
 	
-	@OneToMany
+	@OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
 	@JsonIgnoreProperties("categoria")
 	private List<Produto> produto;
 
