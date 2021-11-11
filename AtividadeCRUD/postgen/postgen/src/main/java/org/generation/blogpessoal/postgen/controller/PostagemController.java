@@ -50,8 +50,11 @@ public class PostagemController {
 	
 	@PutMapping
 	public ResponseEntity<Postagem> put (@RequestBody Postagem postagem){
-		return ResponseEntity.status(HttpStatus.CREATED)
-				.body(postagemRepository.save(postagem));
+		return postagemRepository.findById(postagem.getId())
+				.map(resposta -> {
+					return ResponseEntity.ok().body(postagemRepository.save(postagem));
+				})
+				.orElse(ResponseEntity.notFound().build());
 	}
 
 	@DeleteMapping("/{id}")
